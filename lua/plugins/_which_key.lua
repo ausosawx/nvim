@@ -1,4 +1,5 @@
 local M = {
+    -- Show possible keybindings
     "folke/which-key.nvim",
     keys = { "<leader>", "g", "[", "]" },
 }

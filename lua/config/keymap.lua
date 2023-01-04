@@ -1,5 +1,3 @@
-require("config.keymap.config")
-
 local function nvim_load_mapping(key_group)
     for _, key_map in ipairs(key_group) do
         key_map.options.desc = key_map.description
@@ -478,7 +476,7 @@ plugin_map = {
     },
     {
         mode = { "n" },
-        lhs = "gI",
+        lhs = "gi",
         rhs = function()
             require("telescope.builtin").lsp_implementations()
         end,
@@ -525,7 +523,6 @@ plugin_map = {
         options = { silent = true },
         description = "Edit User Snippets",
     },
-
 
     -- gitsigns
     {

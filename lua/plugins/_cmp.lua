@@ -11,6 +11,7 @@ local M = {
         "hrsh7th/cmp-buffer",
         "kdheepak/cmp-latex-symbols",
         "hrsh7th/cmp-cmdline",
+        "L3MON4D3/LuaSnip",
     },
 }
 
@@ -34,33 +35,41 @@ function M.config()
         }
     end
 
+    local cmp = require("cmp")
     local compare = require("cmp.config.compare")
-    local luasnip = require("luasnip")
+    local luasnip_ok, luasnip = pcall(require, "luasnip")
+    if not luasnip_ok then
+        vim.notify("LuaSnip not ok for cmp", "ERROR", { title = "cmp.lua" })
+    end
 
     -- Insert `(` after select function or method item
     -- require nvim-autopairs
-    local cmp = require("cmp")
-    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+    local pairs_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+    if not pairs_ok then
+        vim.notify("Autopairs not ok for cmp", "ERROR", { title = "cmp.lua" })
+    end
     local handlers = require("nvim-autopairs.completion.handlers")
-    cmp.event:on(
-        "confirm_done",
-        cmp_autopairs.on_confirm_done({
-            filetypes = {
-                -- "*" is an alias to all filetypes
-                ["*"] = {
-                    ["("] = {
-                        kind = {
-                            cmp.lsp.CompletionItemKind.Function,
-                            cmp.lsp.CompletionItemKind.Method,
+    if pairs_ok then
+        cmp.event:on(
+            "confirm_done",
+            cmp_autopairs.on_confirm_done({
+                filetypes = {
+                    -- "*" is an alias to all filetypes
+                    ["*"] = {
+                        ["("] = {
+                            kind = {
+                                cmp.lsp.CompletionItemKind.Function,
+                                cmp.lsp.CompletionItemKind.Method,
+                            },
+                            handler = handlers["*"],
                         },
-                        handler = handlers["*"],
                     },
+                    -- Disable for tex
+                    tex = false,
                 },
-                -- Disable for tex
-                tex = false,
-            },
-        })
-    )
+            })
+        )
+    end
 
     cmp.setup({
         window = {
@@ -118,7 +127,6 @@ function M.config()
 
                 vim_item.menu = ({
                     buffer = "[BUF]",
-                    orgmode = "[ORG]",
                     nvim_lsp = "[LSP]",
                     nvim_lua = "[LUA]",
                     path = "[PATH]",
@@ -141,7 +149,7 @@ function M.config()
             ["<Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
-                elseif luasnip.expand_or_jumpable() then
+                elseif luasnip_ok and luasnip.expand_or_jumpable() then
                     luasnip.expand_or_jump()
                 elseif has_words_before() then
                     cmp.complete()
@@ -152,7 +160,7 @@ function M.config()
             ["<S-Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
-                elseif luasnip.jumpable(-1) then
+                elseif luasnip_ok and luasnip.jumpable(-1) then
                     luasnip.jump(-1)
                 else
                     fallback()
@@ -161,7 +169,9 @@ function M.config()
         },
         snippet = {
             expand = function(args)
-                require("luasnip").lsp_expand(args.body)
+                if luasnip_ok then
+                    require("luasnip").lsp_expand(args.body)
+                end
             end,
         },
         sources = cmp.config.sources({

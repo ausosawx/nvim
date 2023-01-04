@@ -1,29 +1,22 @@
 return {
+    -- as dependencies
     { "nvim-lua/plenary.nvim" },
-    { "nvim-telescope/telescope-ui-select.nvim" },
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    -- provide same icons as well as colors for each icon
     { "kyazdani42/nvim-web-devicons" },
+    -- nvim lua API
+    { "folke/neodev.nvim", event = "VeryLazy" },
+    -- snippets for LuaSnip
     { "rafamadriz/friendly-snippets", event = "VeryLazy" },
     { "honza/vim-snippets", event = "VeryLazy" },
-    { "williamboman/mason-lspconfig.nvim", event = "VeryLazy" },
-    { "MunifTanjim/nui.nvim", event = "VeryLazy" },
-    { "folke/neodev.nvim", event = "VeryLazy" },
+    -- search
     { "windwp/nvim-spectre", event = "VeryLazy" },
+    -- highlight, navigate, and operate on sets of matching text
     { "andymass/vim-matchup", event = "VeryLazy" },
-    { "dstein64/vim-startuptime", cmd = "StartupTime" },
+    -- color highlighte
     { "norcalli/nvim-colorizer.lua", event = "VeryLazy" },
+    -- multicursors operation
     { "mg979/vim-visual-multi", keys = "<c-n>" },
-    {
-        "nvim-orgmode/orgmode",
-        event = "VeryLazy",
-        config = function()
-            require("orgmode").setup_ts_grammar()
-            require("orgmode").setup({
-                org_agenda_files = { "~/Data/org/*" },
-                org_default_notes_file = "~/Data/code/org/refile.org",
-            })
-        end,
-    },
+    -- neovim easy motion
     {
         "phaazon/hop.nvim",
         branch = "v2",
@@ -32,6 +25,7 @@ return {
             require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
         end,
     },
+    -- surround selections
     {
         "kylechui/nvim-surround",
         event = "VeryLazy",
@@ -46,6 +40,7 @@ return {
         keys = "<c-<F5>>",
         build = "cd app && npm install",
     },
+    -- highlight on matched information
     {
         "kevinhwang91/nvim-hlslens",
         event = "VeryLazy",
@@ -58,6 +53,7 @@ return {
             })
         end,
     },
+    -- integration with build systems such as cmake
     {
         "Shatur/neovim-tasks",
         ft = { "c", "cpp", "hpp", "cmake" },
@@ -71,6 +67,7 @@ return {
             })
         end,
     },
+    -- highlight and search for todo comments
     {
         "folke/todo-comments.nvim",
         event = "VeryLazy",
@@ -78,6 +75,7 @@ return {
             require("todo-comments").setup()
         end,
     },
+    -- show function signature
     {
         "ray-x/lsp_signature.nvim",
         event = "VeryLazy",

@@ -1,6 +1,6 @@
 local M = {
     "hoob3rt/lualine.nvim",
-    event = "VeryLazy"
+    event = "VeryLazy",
 }
 
 function M.config()
@@ -66,11 +66,15 @@ function M.config()
         },
         sections = {
             lualine_a = { "mode" },
-            lualine_b = { { "branch" }, { "diff", source = diff_source }, {
-                require("lazy.status").updates,
-                cond = require("lazy.status").has_updates,
-                color = { fg = "#ff9e64" },
-            } },
+            lualine_b = {
+                { "branch" },
+                { "diff", source = diff_source },
+                {
+                    require("lazy.status").updates,
+                    cond = require("lazy.status").has_updates,
+                    color = { fg = "#ff9e64" },
+                },
+            },
             lualine_x = {
                 {
                     "diagnostics",
@@ -86,9 +90,9 @@ function M.config()
                     icons_enabled = true,
 
                     symbols = {
-                        unix = '',
-                        dos = '',
-                        mac = '',
+                        unix = "",
+                        dos = "",
+                        mac = "",
                     },
                 },
             },

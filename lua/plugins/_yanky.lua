@@ -1,4 +1,5 @@
 local M = {
+    --  Improve yank and put functionalities
     "gbprod/yanky.nvim",
 }
 

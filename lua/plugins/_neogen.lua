@@ -1,9 +1,11 @@
 local M = {
+    -- Annotation Toolkit
     "danymat/neogen",
     event = "VeryLazy",
 }
 
 function M.config()
+    -- local ok
     require("neogen").setup({
         enabled = true,
         snippet_engine = "luasnip",

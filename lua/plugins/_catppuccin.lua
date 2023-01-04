@@ -1,7 +1,6 @@
-local M =
-{
+local M = {
     "catppuccin/nvim",
-    name = "catppuccin"
+    name = "catppuccin",
 }
 
 function M.config()
@@ -83,6 +82,7 @@ function M.config()
             barbar = false,
         },
     })
+
 end
 
 return M

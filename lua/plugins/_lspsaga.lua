@@ -1,7 +1,7 @@
 local M = {
     "glepnir/lspsaga.nvim",
     branch = "main",
-    event = "VeryLazy"
+    event = "VeryLazy",
 }
 
 function M.config()

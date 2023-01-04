@@ -1,4 +1,5 @@
 local M = {
+    -- automatically highlighting other uses of the word
     "RRethy/vim-illuminate",
     event = "VeryLazy",
 }

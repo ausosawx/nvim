@@ -36,6 +36,7 @@ function M.config()
 
         -- lint
         "markdownlint",
+        "pylint",
     }
 
     local new_installed_resources = {}

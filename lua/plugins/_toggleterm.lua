@@ -4,6 +4,19 @@ local M = {
 }
 
 function M.config()
+    vim.api.nvim_create_user_command("Togglelazygit", function()
+        local Terminal = require("toggleterm.terminal").Terminal
+        local lazygit = Terminal:new({
+            cmd = "lazygit",
+            hidden = true,
+            direction = "float",
+            float_opts = {
+                border = "rounded",
+            },
+        })
+        lazygit:toggle()
+    end, {})
+
     require("toggleterm").setup({
         start_in_insert = true,
         shade_terminals = true,

@@ -19,8 +19,9 @@ return {
                 },
                 pylint = {
                     enabled = true,
+                    executable = vim.fn.stdpath("data") .. "/mason/bin/pylint",
                     args = {
-                        "--rcfile=" .. vim.fn.stdpath("config") .. "/lint/pylintrc"
+                        "--rcfile=" .. vim.fn.stdpath("config") .. "/lint/pylintrc",
                     },
                 },
             },

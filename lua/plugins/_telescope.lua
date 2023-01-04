@@ -2,6 +2,12 @@ local M = {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     event = "VeryLazy",
+    dependencies = {
+        -- Sets vim.ui.select to telescope
+        { "nvim-telescope/telescope-ui-select.nvim" },
+        -- c port of fzf for telescope
+        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
 }
 
 function M.config()

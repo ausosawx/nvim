@@ -13,9 +13,13 @@ end
 vim.opt.runtimepath:prepend(lazypath)
 
 -- load lazy
-require("lazy").setup("config.plugins", {
+require("lazy").setup({
+    spec = { import = "plugins" },
     defaults = { lazy = true },
     checker = { enabled = true },
+    install = {
+        colorscheme = { "catppuccin", "habamax" },
+    },
     performance = {
         rtp = {
             disabled_plugins = {

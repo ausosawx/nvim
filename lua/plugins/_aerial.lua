@@ -1,6 +1,6 @@
 local M = {
     "stevearc/aerial.nvim",
-    event = "VeryLazy"
+    event = "VeryLazy",
 }
 
 function M.config()

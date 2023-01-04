@@ -1,4 +1,5 @@
 local M = {
+    -- Easy LSP setting tool
     "jose-elias-alvarez/null-ls.nvim",
     event = "VeryLazy",
 }

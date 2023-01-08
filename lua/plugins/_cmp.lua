@@ -13,6 +13,7 @@ local M = {
         "hrsh7th/cmp-cmdline",
         "L3MON4D3/LuaSnip",
     },
+    enabled = false,
 }
 
 function M.config()

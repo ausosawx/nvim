@@ -2,13 +2,14 @@ local M = {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = "williamboman/mason-lspconfig.nvim",
+    enabled = false,
 }
 
 function M.config()
-    local dev_ok, neodev = pcall(require, "folke/neodev.nvim")
-    if dev_ok then
-        neodev.setup()
-    end
+    -- local dev_ok, neodev = pcall(require, "neodev")
+    -- if dev_ok then
+    --     neodev.setup()
+    -- end
 
     local mason_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
     if not mason_ok then

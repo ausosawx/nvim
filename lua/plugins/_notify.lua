@@ -23,4 +23,5 @@ function M.config()
     vim.notify = notify
 end
 
+
 return M

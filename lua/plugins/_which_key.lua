@@ -1,7 +1,7 @@
 local M = {
     -- Show possible keybindings
     "folke/which-key.nvim",
-    keys = { "<leader>", "g", "[", "]" },
+    event = "VeryLazy"
 }
 
 function M.config()

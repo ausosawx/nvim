@@ -34,7 +34,8 @@ function M.config()
         },
         highlight = {
             enable = true,
-            additional_vim_regex_highlighting = { "org" },
+            disable = { "latex" },
+            -- additional_vim_regex_highlighting = { "org", "latex", "markdown" },
         },
         matchup = {
             enable = true,

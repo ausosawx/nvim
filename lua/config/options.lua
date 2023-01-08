@@ -2,6 +2,7 @@ local function load_options()
     local global_local = {
         autochdir = false, -- 自动切换为打开或者选择的文件所在的目录,由于特殊需求此功能在event.lua中特别实现
         clipboard = "unnamedplus", -- 剪贴板同步
+        conceallevel = 2, -- 隐藏标记
         completeopt = "menuone,noselect", -- 逗号分隔的选项列表，用于插入模式的补全
         cursorline = true, -- 高亮光标所在的文本行
         expandtab = true, -- 输入Tab字符时,自动替换成空格

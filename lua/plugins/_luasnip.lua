@@ -2,6 +2,10 @@ local M = {
     "L3MON4D3/LuaSnip",
 }
 
+function M.init()
+    vim.keymap.set("n", "<leader>se", "<cmd>LuaSnipEdit<cr>", { desc = "Edit User Snippets" })
+end
+
 function M.ft_edit()
     require("luasnip.loaders").edit_snippet_files({
         format = function(path, _)

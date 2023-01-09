@@ -39,7 +39,7 @@ vim.g.loaded_node_provider = 0
 vim.g.did_install_default_menus = 1 -- do not load menu
 
 -- Enable highlighting for lua HERE doc inside vim script
-vim.g.vimsyn_embed = 'l'
+vim.g.vimsyn_embed = "l"
 
 -- Custom mapping <leader>
 vim.g.mapleader = " "

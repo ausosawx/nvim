@@ -4,6 +4,14 @@ local M = {
     event = "VeryLazy",
 }
 
+function M.init()
+    vim.keymap.set("n", "<leader>n", function()
+        vim.ui.select({ "func", "file", "class", "type" }, _, function(choice)
+            require("neogen").generate({ type = choice })
+        end)
+    end, { desc = "Create annotations" })
+end
+
 function M.config()
     -- local ok
     require("neogen").setup({

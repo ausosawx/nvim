@@ -3,6 +3,11 @@ local M = {
     "gbprod/yanky.nvim",
 }
 
+function M.init()
+    vim.keymap.set("n", "<leader>fy", ":Telescope yank_history<cr>", { desc = "Find Clipboard History" })
+    vim.keymap.set("n", "<leader>cy", ":YankyClearHistory<cr>", { desc = "Clear Clipboard History" })
+end
+
 function M.config()
     local utils = require("yanky.utils")
     local mapping = require("yanky.telescope.mapping")

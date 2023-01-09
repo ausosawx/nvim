@@ -3,6 +3,39 @@ local M = {
     event = "VeryLazy",
 }
 
+function M.init()
+    vim.keymap.set("n", "<c-q>", "<cmd>bdelete!<cr>", { desc = "Close current buffer" })
+    vim.keymap.set("n", "<leader>h", "<cmd>BufferLineCyclePrev<cr>", { desc = "Go to left buffer" })
+    vim.keymap.set("n", "<leader>l", "<cmd>BufferLineCycleNext<cr>", { desc = "Go to right buffer" })
+    vim.keymap.set("n", "<c-e>", "<cmd>BufferLineMovePrev<cr>", { desc = "Move current buffer to left" })
+    vim.keymap.set("n", "<c-y>", "<cmd>BufferLineMoveNext<cr>", { desc = "Move current buffer to right" })
+    vim.keymap.set("n", "<leader>bn", "<cmd>enew<cr>", { desc = "Create new buffer" })
+    vim.keymap.set("n", "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", { desc = "Close all left buffers" })
+    vim.keymap.set("n", "<leader>br", "<cmd>BufferLineCloseRight<cr>", { desc = "Close all right buffers" })
+    vim.keymap.set("n", "<leader>b1", "<cmd>BufferLineGoToBuffer 1<cr>", { desc = "Go to buffer 1" })
+    vim.keymap.set("n", "<leader>b2", "<cmd>BufferLineGoToBuffer 2<cr>", { desc = "Go to buffer 2" })
+    vim.keymap.set("n", "<leader>b3", "<cmd>BufferLineGoToBuffer 3<cr>", { desc = "Go to buffer 3" })
+    vim.keymap.set("n", "<leader>b4", "<cmd>BufferLineGoToBuffer 4<cr>", { desc = "Go to buffer 4" })
+    vim.keymap.set("n", "<leader>b5", "<cmd>BufferLineGoToBuffer 5<cr>", { desc = "Go to buffer 5" })
+    vim.keymap.set("n", "<leader>b6", "<cmd>BufferLineGoToBuffer 6<cr>", { desc = "Go to buffer 6" })
+    vim.keymap.set("n", "<leader>b7", "<cmd>BufferLineGoToBuffer 7<cr>", { desc = "Go to buffer 7" })
+    vim.keymap.set("n", "<leader>b8", "<cmd>BufferLineGoToBuffer 8<cr>", { desc = "Go to buffer 8" })
+    vim.keymap.set("n", "<leader>b9", "<cmd>BufferLineGoToBuffer 9<cr>", { desc = "Go to buffer 9" })
+    vim.keymap.set("n", "<leader>bo", function()
+        vim.cmd("BufferLineCloseLeft")
+        vim.cmd("BufferLineCloseRight")
+    end, { desc = "Close all other buffers" })
+    vim.keymap.set("n", "<leader>ba", function()
+        vim.cmd("BufferLineCloseLeft")
+        vim.cmd("BufferLineCloseRight")
+        vim.cmd("bdelete!")
+    end, { desc = "Close all buffers" })
+    vim.keymap.set("n", "<leader>bt", "<cmd>BufferLinePick<cr>", { desc = "Go to buffer *" })
+    vim.keymap.set("n", "<leader>bs", "<cmd>BufferLineSortByExtension<cr>", {
+        desc = "Buffers sort (by extension)",
+    })
+end
+
 function M.config()
     local opts = {
         options = {

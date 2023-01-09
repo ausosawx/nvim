@@ -82,7 +82,6 @@ function M.config()
             barbar = false,
         },
     })
-
 end
 
 return M

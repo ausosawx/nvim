@@ -18,9 +18,9 @@ function M.config()
             view_search = "cmdline_popup_search",
             opts = { buf_options = { filetype = "vim" } },
         },
-        -- messages = {
-        --     enabled = false,
-        -- },
+        messages = {
+            enabled = false,
+        },
         popupmenu = {
             enabled = false,
             backend = "cmp",

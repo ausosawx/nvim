@@ -3,6 +3,10 @@ local M = {
     event = "VeryLazy",
 }
 
+function M.init()
+    vim.keymap.set("n", "<leader>fn", ":Notifications<cr>", { desc = "Find notice history" })
+end
+
 function M.config()
     local notify = require("notify")
 
@@ -22,6 +26,5 @@ function M.config()
 
     vim.notify = notify
 end
-
 
 return M

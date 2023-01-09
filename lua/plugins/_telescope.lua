@@ -10,6 +10,42 @@ local M = {
     },
 }
 
+function M.init()
+    vim.keymap.set("n", "<leader>ff", function()
+        require("telescope.builtin").find_files()
+    end, { desc = "Find files in the current workspace" })
+    vim.keymap.set("n", "<leader>fg", function()
+        require("telescope.builtin").live_grep()
+    end, { desc = "Find string in the current workspace" })
+    vim.keymap.set("n", "<leader>fo", function()
+        require("telescope.builtin").oldfiles()
+    end, { desc = "Find telescope history" })
+    vim.keymap.set("n", "<leader>fh", function()
+        require("telescope.builtin").resume()
+    end, { desc = "Find last lookup" })
+    vim.keymap.set("n", "<leader>ft", function()
+        require("telescope.builtin").help_tags()
+    end, { desc = "Find all help document tags" })
+    vim.keymap.set("n", "<leader>fm", function()
+        require("telescope.builtin").marks()
+    end, { desc = "Find marks in the current workspace" })
+    vim.keymap.set("n", "<leader>fi", function()
+        require("telescope.builtin").highlights()
+    end, { desc = "Find all neovim highlights" })
+    vim.keymap.set("n", "<leader>fb", function()
+        require("telescope.builtin").buffers()
+    end, { desc = "Find all buffers" })
+    vim.keymap.set("n", "<leader>f/", function()
+        require("telescope.builtin").search_history()
+    end, { desc = "Find all search history" })
+    vim.keymap.set("n", "<leader>f:", function()
+        require("telescope.builtin").command_history()
+    end, { desc = "Find all command history" })
+    vim.keymap.set("n", "<leader>fs", function()
+        require("telescope.builtin").colorscheme()
+    end, { desc = "list all colorschems" })
+end
+
 function M.config()
     require("telescope").setup({
         defaults = {

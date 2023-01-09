@@ -3,6 +3,15 @@ local M = {
     event = "VeryLazy",
 }
 
+function M.init()
+    vim.keymap.set("n", "<leader>1", function()
+        vim.cmd("NvimTreeToggle")
+    end, { desc = "Open File Explorer" })
+    vim.keymap.set("n", "<leader>fc", function()
+        vim.cmd("NvimTreeFindFile")
+    end, { desc = "Find the current file and open it in file explorer" })
+end
+
 function M.config()
     require("nvim-tree").setup({
         hijack_cursor = true,

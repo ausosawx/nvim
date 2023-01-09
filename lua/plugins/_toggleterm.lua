@@ -3,6 +3,14 @@ local M = {
     event = "VeryLazy",
 }
 
+function M.init()
+    vim.keymap.set("n", "<leader>tt", ":ToggleTerm<cr>", { desc = "Toggle bottom or vertical terminal" })
+    vim.keymap.set("n", "<leader>tv", ":ToggleTerm direction=vertical<cr>", { desc = "Toggle vertical terminal" })
+    vim.keymap.set("n", "<leader>tf", ":ToggleTerm direction=float<cr>", { desc = "Toggle float terminal" })
+    vim.keymap.set("n", "<leader>tg", ":lua toggle_lazygit()<cr>", { desc = "Toggle lazygit" })
+    vim.keymap.set("n", "<leader>ta", ":ToggleTermToggleAll<cr>", { desc = "Toggle all terminal" })
+end
+
 function M.config()
     vim.api.nvim_create_user_command("Togglelazygit", function()
         local Terminal = require("toggleterm.terminal").Terminal

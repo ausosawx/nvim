@@ -5,6 +5,26 @@ local M = {
     enabled = false,
 }
 
+function M.init()
+    -- nvim-lspconfig
+    vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format buffer" })
+    vim.keymap.set("n", "gs", function()
+        require("telescope.builtin").lsp_document_symbols()
+    end, { desc = "Find all document symbols" })
+    vim.keymap.set("n", "gr", function()
+        require("telescope.builtin").lsp_references()
+    end, { desc = "Go to references" })
+    vim.keymap.set("n", "gi", function()
+        require("telescope.builtin").lsp_implementations()
+    end, { desc = "Go to implementations" })
+    vim.keymap.set("n", "gy", function()
+        require("telescope.builtin").lsp_type_definitions()
+    end, { desc = "Go to type definitions" })
+    vim.keymap.set("n", "gO", function()
+        require("telescope.builtin").diagnostics()
+    end, { desc = "Show Workspace Diagnostics" })
+end
+
 function M.config()
     -- local dev_ok, neodev = pcall(require, "neodev")
     -- if dev_ok then

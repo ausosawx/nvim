@@ -3,6 +3,16 @@ local M = {
     event = "VeryLazy",
 }
 
+function M.init()
+    vim.keymap.set("n", "<leader>2", "<cmd>AerialToggle<cr>", { desc = "Open Outilne Explorer" })
+    vim.keymap.set("n", "[[", function()
+        require("aerial").prev_up()
+    end, { desc = "Move up one level" })
+    vim.keymap.set("n", "]]", function()
+        require("aerial").next_up()
+    end, { desc = "Move down one level" })
+end
+
 function M.config()
     require("aerial").setup({
         show_guides = true,

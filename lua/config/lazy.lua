@@ -35,3 +35,9 @@ require("lazy").setup({
         },
     },
 })
+
+vim.keymap.set({ "n" }, "<leader>ph", ":Lazy home<cr>", { desc = "Lazy home" })
+vim.keymap.set({ "n" }, "<leader>ps", ":Lazy sync<cr>", { desc = "Plugins sync" })
+vim.keymap.set({ "n" }, "<leader>pc", ":Lazy clean<cr>", { desc = "Plugins clean" })
+vim.keymap.set({ "n" }, "<leader>pC", ":Lazy clear<cr>", { desc = "Cache clean" })
+vim.keymap.set({ "n" }, "<leader>pu", ":Lazy update<cr>", { desc = "Plugins update" })

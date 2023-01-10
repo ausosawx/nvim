@@ -21,8 +21,6 @@ function M.init()
     )
     keyset("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 
-    keyset("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"]], opts)
-
     keyset("i", "<c-j>", "<Plug>(coc-snippets-expand-jump)")
     keyset("i", "<c-/>", "coc#refresh()", { silent = true, expr = true })
 
@@ -83,6 +81,8 @@ function M.init()
     keyset("i", "<C-b>", 'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
     keyset("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
     keyset("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
+
+    keyset("i", "<CR>", [[coc#pum#visible() ? coc#pum#confirm() : "\<Enter>"]], opts)
 end
 
 function M.config()

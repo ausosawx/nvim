@@ -30,7 +30,7 @@ function M.config()
             "vim",
             "regex",
             "org",
-            "julia",
+            -- "julia",
         },
         highlight = {
             enable = true,

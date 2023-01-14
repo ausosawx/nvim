@@ -86,7 +86,7 @@ end
 
 function M.config()
     vim.g.coc_global_extensions =
-        { "coc-json", "coc-clangd", "coc-sumneko-lua", "coc-julia", "coc-vimtex", "coc-snippets", "coc-stylua" }
+    { "coc-json", "coc-clangd", "coc-sumneko-lua", "coc-julia", "coc-vimtex", "coc-snippets" }
 end
 
 return M

@@ -1,6 +1,4 @@
 {
     "Lua.telemetry.enable": false,
     "sumneko-lua.enableNvimLuaDev": true,
-    "stylua.configPath": "/home/wx/.config/nvim/stylua.toml",
-    "Lua.format.enable": false
 }

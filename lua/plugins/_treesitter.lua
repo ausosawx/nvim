@@ -30,6 +30,7 @@ function M.config()
             "vim",
             "regex",
             "org",
+            "markdown"
             -- "julia",
         },
         highlight = {

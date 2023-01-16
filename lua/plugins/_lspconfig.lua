@@ -2,7 +2,6 @@ local M = {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = "williamboman/mason-lspconfig.nvim",
-    enabled = false,
 }
 
 function M.init()

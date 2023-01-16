@@ -1,7 +1,6 @@
 local M = {
     "williamboman/mason.nvim",
     event = "VeryLazy",
-    enabled = false,
 }
 
 function M.config()
@@ -20,11 +19,13 @@ function M.config()
     local mason_registry = require("mason-registry")
     local installer_resources = {
         -- lsp
-        "python-lsp-server",
+        -- "python-lsp-server",
+        "pyright",
         "json-lsp",
         "lua-language-server",
         "bash-language-server",
         "clangd",
+        "rust-analyzer",
 
         -- dap
         "debugpy",
@@ -34,6 +35,7 @@ function M.config()
         "shfmt",
         "cmakelang",
         "stylua",
+        "yapf",
 
         -- lint
         "markdownlint",

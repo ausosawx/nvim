@@ -2,6 +2,7 @@ local M = {
     "neoclide/coc.nvim",
     branch = "release",
     event = { "InsertEnter", "CmdlineEnter" },
+    enabled = false,
 }
 
 function M.init()
@@ -86,7 +87,7 @@ end
 
 function M.config()
     vim.g.coc_global_extensions =
-    { "coc-json", "coc-clangd", "coc-sumneko-lua", "coc-julia", "coc-vimtex", "coc-snippets" }
+        { "coc-json", "coc-clangd", "coc-sumneko-lua", "coc-julia", "coc-vimtex", "coc-snippets" }
 end
 
 return M

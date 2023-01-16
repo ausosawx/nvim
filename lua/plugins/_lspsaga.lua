@@ -1,7 +1,7 @@
 local M = {
     "glepnir/lspsaga.nvim",
     branch = "main",
-    event = "BufRead",
+    event = "VeryLazy",
 }
 
 function M.init()
@@ -14,18 +14,20 @@ function M.init()
     vim.keymap.set("n", "gl", "<cmd>Lspsaga show_line_diagnostics<cr>", { desc = "Show line diagnostics" })
     vim.keymap.set("n", "go", "<cmd>Lspsaga show_cursor_diagnostics<cr>", { desc = "Show cursor diagnostics" })
     vim.keymap.set("n", "gd", "<cmd>Lspsaga peek_definition<cr>", { desc = "Go to definitions" })
+    vim.keymap.set("n", "<Leader>ci", "<cmd>Lspsaga incoming_calls<CR>")
+    vim.keymap.set("n", "<Leader>co", "<cmd>Lspsaga outgoing_calls<CR>")
     vim.keymap.set("n", "[e", function()
         require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
     end, { desc = "Only jump to prev error" })
     vim.keymap.set("n", "]e", function()
         require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
     end, { desc = "Only jump to next error" })
-    vim.keymap.set(
-        "n",
-        "gq",
-        "<cmd>Lspsaga lsp_finder<cr>",
-        { desc = "find the symbol definition implement reference" }
-    )
+    -- vim.keymap.set(
+    --     "n",
+    --     "gq",
+    --     "<cmd>Lspsaga lsp_finder<cr>",
+    --     { desc = "find the symbol definition implement reference" }
+    -- )
 end
 
 function M.config()

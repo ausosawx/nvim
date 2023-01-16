@@ -95,28 +95,21 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
     end,
 })
 
-local count = vim.api.nvim_eval("v:count")
-
 -- Compile rules
 local switch = {
     ["c"] = function()
         if vim.fn.isdirectory("bin") == 0 then
             vim.fn.mkdir("bin")
         end
-
-        require("toggleterm").exec_command(
-            "cmd='clang -std=c17 -lm -Wall -Wextra -Werror -Wpedantic -pedantic -g % -o bin/%< && time ./bin/%<'",
-            count
-        )
+        vim.cmd([[TermExec cmd="clang -std=c17 -lm -Wall -Wextra -Werror -Wpedantic -pedantic -g % -o bin/%< && time ./bin/%<" direction=vertical]])
     end,
     ["cpp"] = function()
         if vim.fn.isdirectory("bin") == 0 then
             vim.fn.mkdir("bin")
         end
 
-        require("toggleterm").exec_command(
-            "cmd='clang++ -std=c++20 -stdlib=libc++ -Werror -Weverything -Wno-disabled-macro-expansion -Wno-float-equal -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-padded -Wno-old-style-cast -lc++ -lc++abi -g % -o bin/%< && time ./bin/%<'",
-            count
+        vim.cmd(
+            [[TermExec cmd="clang++ -std=c++20 -stdlib=libc++ -Werror -Weverything -Wno-disabled-macro-expansion -Wno-float-equal -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-padded -Wno-old-style-cast -lc++ -lc++abi -g % -o bin/%< && time ./bin/%<" direction=vertical]]
         )
     end,
     ["markdown"] = function()
@@ -124,28 +117,32 @@ local switch = {
     end,
     ["tex"] = function() end,
     ["sh"] = function()
-        require("toggleterm").exec_command("cmd='chmod +x % && ./%'", count)
+        vim.cmd([[TermExec cmd="chmod +x % && ./%" direction=vertical]])
     end,
     ["python"] = function()
-        require("toggleterm").exec_command("cmd='python3 %'", count)
+        -- require("toggleterm").exec_command("cmd='python3 %'", count)
+        vim.cmd([[TermExec cmd="python3 %" direction=vertical]])
     end,
     ["lua"] = function()
-        require("toggleterm").exec_command("cmd='lua %'", count)
+        vim.cmd([[TermExec cmd="lua %" direction=vertical]])
     end,
     ["java"] = function()
         if vim.fn.isdirectory("build") == 0 then
             vim.fn.mkdir("build")
         end
 
-        require("toggleterm").exec_command("cmd='javac % -d build/ && java %'", count)
+        vim.cmd([[TermExec cmd="javac % -d build/ && java %" direction=vertical]])
     end,
     ["html"] = function()
         vim.cmd([[!firefox-beta % &]])
     end,
+    ["rust"] = function()
+        vim.cmd([[TermExec cmd="cargo run" direction=vertical]])
+    end,
 }
 
 -- Bind ctrl+F5 to compile according to the rules above
-vim.keymap.set("n", "<c-F5>", function()
+vim.keymap.set("n", "<F29>", function()
     local ft = vim.bo.filetype
     if switch[ft] then
         switch[ft]()

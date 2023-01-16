@@ -2,7 +2,6 @@ local M = {
     -- Easy LSP setting tool
     "jose-elias-alvarez/null-ls.nvim",
     event = "VeryLazy",
-    enabled = false,
 }
 
 function M.config()
@@ -16,6 +15,7 @@ function M.config()
         diagnostics.markdownlint,
         formatting.stylua,
         formatting.shfmt,
+        formatting.yapf,
     }
 
     null_ls.setup({ sources = sources })

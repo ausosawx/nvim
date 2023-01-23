@@ -10,10 +10,17 @@ return {
     { "honza/vim-snippets", event = "VeryLazy" },
     -- highlight, navigate, and operate on sets of matching text
     { "andymass/vim-matchup", event = "VeryLazy" },
-    -- color highlighte
-    { "norcalli/nvim-colorizer.lua", event = "VeryLazy" },
     -- multicursors operation
     { "mg979/vim-visual-multi", keys = "<c-n>" },
+    -- color highlighte
+    {
+        "norcalli/nvim-colorizer.lua",
+        -- event = "VeryLazy",
+        lazy = false,
+        config = function()
+            require("colorizer").setup()
+        end,
+    },
     -- surround selections
     {
         "kylechui/nvim-surround",

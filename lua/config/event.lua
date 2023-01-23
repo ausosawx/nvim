@@ -143,12 +143,23 @@ local switch = {
     end,
 }
 
+local desktop = vim.api.nvim_exec([[echo $XDG_CURRENT_DESKTOP]], true)
+
+local key = nil
+if desktop == "Hyprland" then
+    key = "<c-F5>"
+elseif desktop == "wayfire" then
+    key = "<c-F5>"
+else
+    vim.notify("undefined desktop", "ERROR", { title = "event.lua" })
+end
+
 -- Bind ctrl+F5 to compile according to the rules above
-vim.keymap.set("n", "<C-F5>", function()
+vim.keymap.set("n", key, function()
     local ft = vim.bo.filetype
     if switch[ft] then
         switch[ft]()
     else
-        vim.notify("You haven't set the quick_compile rules", "ERROR", { title = "quick_compile" })
+        vim.notify("You haven't set the quick_compile rules", "ERROR", { title = "event.lua" })
     end
 end, { silent = true, desc = "Compile according to the filetype" })

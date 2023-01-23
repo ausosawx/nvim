@@ -1,6 +1,5 @@
 local M = {
     "glepnir/lspsaga.nvim",
-    branch = "main",
     event = "VeryLazy",
 }
 
@@ -66,14 +65,14 @@ function M.config()
     set_sidebar_icons()
 
     local colors = get_palette()
-
+    --
     require("lspsaga").setup({
         scroll_preview = {
             scroll_down = "<C-p>",
             scroll_up = "<C-b>",
         },
         ui = {
-            diagnostic = { " ", " ", "  ", " " },
+            border = "rounded",
             kind = {
                 File = { " ", colors.rosewater },
                 Module = { " ", colors.blue },

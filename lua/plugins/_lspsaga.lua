@@ -68,6 +68,10 @@ function M.config()
     local colors = get_palette()
 
     require("lspsaga").setup({
+        scroll_preview = {
+            scroll_down = "<C-p>",
+            scroll_up = "<C-b>",
+        },
         ui = {
             diagnostic = { " ", " ", "  ", " " },
             kind = {

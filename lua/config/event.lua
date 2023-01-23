@@ -101,7 +101,9 @@ local switch = {
         if vim.fn.isdirectory("bin") == 0 then
             vim.fn.mkdir("bin")
         end
-        vim.cmd([[TermExec cmd="clang -std=c17 -lm -Wall -Wextra -Werror -Wpedantic -pedantic -g % -o bin/%< && time ./bin/%<" direction=vertical]])
+        vim.cmd(
+            [[TermExec cmd="clang -std=c17 -lm -Wall -Wextra -Werror -Wpedantic -pedantic -g % -o bin/%< && time ./bin/%<" direction=vertical]]
+        )
     end,
     ["cpp"] = function()
         if vim.fn.isdirectory("bin") == 0 then
@@ -142,7 +144,7 @@ local switch = {
 }
 
 -- Bind ctrl+F5 to compile according to the rules above
-vim.keymap.set("n", "<F29>", function()
+vim.keymap.set("n", "<C-F5>", function()
     local ft = vim.bo.filetype
     if switch[ft] then
         switch[ft]()

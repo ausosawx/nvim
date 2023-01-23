@@ -28,7 +28,6 @@ function M.config()
         g = { name = "Git" },
         p = { name = "Plugins" },
         c = { name = "Cmake", s = "Select type or target" },
-        o = { name = "Org" },
     }, { prefix = "<leader>", mode = "n" })
 
     -- comment

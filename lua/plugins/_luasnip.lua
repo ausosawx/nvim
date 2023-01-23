@@ -34,7 +34,7 @@ function M.config()
     require("luasnip.loaders.from_vscode").lazy_load()
     require("luasnip.loaders.from_snipmate").lazy_load()
 
-    vim.cmd([[command! LuaSnipEdit :lua require("config.plugins.luasnip").ft_edit()]])
+    vim.cmd([[command! LuaSnipEdit :lua require("plugins._luasnip").ft_edit()]])
 end
 
 return M

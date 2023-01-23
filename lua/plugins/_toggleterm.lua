@@ -26,6 +26,7 @@ function M.config()
     end, {})
 
     require("toggleterm").setup({
+
         start_in_insert = true,
         shade_terminals = true,
         shading_factor = 1,

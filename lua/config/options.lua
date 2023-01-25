@@ -5,7 +5,6 @@ local function load_options()
         conceallevel = 2, -- 隐藏标记
         completeopt = "menuone,noselect", -- 逗号分隔的选项列表，用于插入模式的补全
         cursorline = true, -- 高亮光标所在的文本行
-        expandtab = true, -- 输入Tab字符时,自动替换成空格
         fileencodings = "ucs-bom,utf-8,gbk,big5,gb18030,latin1", -- 字符编码
         filetype = "plugin", -- 执行runtimepath的ftplugin子目录的.lua脚本
         fillchars = "eob: ", -- 缓冲区结束之后的空行为空白而不是默认'~'
@@ -25,13 +24,16 @@ local function load_options()
         ruler = false, -- 标尺，在状态行里显示光标的行号和列号(lualine代替)
         scrolloff = 10, -- 光标上下两侧最少保留的屏幕行数,这使你工作时总有一些可见的上下文
         sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,globals,options", -- 每个单词允许保存和恢复某种设置
-        shiftwidth = 4, -- 自动缩进时,缩进长度为4
         shortmess = "sI", -- 避免文件信息的所有  hit-enter  提示
         showmode = false, -- 在状态行上显示当前模式的消息(lualine代替)
         signcolumn = "yes:1", -- 显示符号(lsp info,error etc),第一列显示标号
         smartcase = true, -- 如果搜索模式包含大写字符，不使用 'ignorecase' 选项
-        smartindent = true, -- 插入新行时智能自动缩进
+        expandtab = true, -- 输入Tab字符时,自动替换成空格
+        shiftwidth = 4, -- 自动缩进时,缩进长度为4
         softtabstop = -1, -- softtabstop的值为负数,会使用shiftwidth的值,两者保持一致,方便统一缩进
+        smartindent = true, -- 插入新行时智能自动缩进
+        autoindent = true,
+        cindent = true,
         spell = false, -- 默认不打开拼写检查
         spelllang = "en_us,cjk", -- 为这些语言进行拼写检查
         swapfile = true, -- 缓冲区是否使用交换文件

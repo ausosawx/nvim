@@ -7,9 +7,6 @@ return {
       experimental = {
         pathStrict = true,
       },
-      library = {
-        runtime = "~/projects/neovim/runtime/",
-      },
     },
   },
 
@@ -30,6 +27,8 @@ return {
         "isort",
         "flake8",
         "markdownlint",
+        "debugpy",
+        "codelldb",
       },
     },
   },
@@ -66,7 +65,6 @@ return {
         },
         yamlls = {},
         sumneko_lua = {
-          -- cmd = { "/home/folke/projects/lua-language-server/bin/lua-language-server" },
           single_file_support = true,
           settings = {
             Lua = {

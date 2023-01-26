@@ -39,3 +39,11 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.wo.conceallevel = 0
   end,
 })
+
+-- Autosave
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+  callback = function()
+    vim.fn.execute("silent! write")
+  end,
+  nested = true,
+})

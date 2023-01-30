@@ -1,13 +1,16 @@
+require("config").init()
+
 return {
   { "shaunsingh/oxocarbon.nvim" },
   { "ellisonleao/gruvbox.nvim" },
   { "rose-pine/neovim", name = "rose-pine" },
+  { "catppuccin/nvim", name = "catppuccin" },
   {
-    "tokyonight.nvim",
+    "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = function()
-      return {
+    config = function()
+      require("tokyonight").setup({
         style = "moon",
         -- transparent = true,
         -- styles = {
@@ -36,7 +39,7 @@ return {
           hl.TelescopePreviewTitle = { bg = c.bg_dark, fg = c.bg_dark }
           hl.TelescopeResultsTitle = { bg = c.bg_dark, fg = c.bg_dark }
         end,
-      }
+      })
     end,
   },
 }

@@ -26,7 +26,7 @@ return {
       },
       autoformat = require("plugins.lsp.format").autoformat,
       -- options for vim.lsp.buf.format
-      -- `bufnr` and `filter` is handled by the LazyVim formatter,
+      -- `bufnr` and `filter` is handled by the format.lua,
       -- but can be also overriden when specified
       format = {
         formatting_options = nil,
@@ -39,7 +39,7 @@ return {
         ansiblels = {},
         bashls = {},
         clangd = {},
-        denols = false,
+        denols = {},
         cssls = {},
         dockerls = {},
         tsserver = {},
@@ -48,12 +48,25 @@ return {
         html = {},
         gopls = {},
         marksman = {},
-        pyright = {},
+        pyright = {
+          settings = {
+            {
+              python = {
+                analysis = {
+                  autoSearchPaths = true,
+                  diagnosticMode = "workspace",
+                  useLibraryCodeForTypes = true,
+                },
+              },
+            },
+          },
+        },
         rust_analyzer = {
           settings = {
             ["rust-analyzer"] = {
-              cargo = { allFeatures = true },
-              checkOnSave = {
+              cargo = { features = "all" },
+              checkOnSave = true,
+              check = {
                 command = "clippy",
                 extraArgs = { "--no-deps" },
               },
@@ -76,6 +89,9 @@ return {
                 parameters = {
                   "--log-level=trace",
                 },
+              },
+              telemetry = {
+                enable = false,
               },
               diagnostics = {
                 -- enable = false,
@@ -145,8 +161,11 @@ return {
       vim.diagnostic.config(opts.diagnostics)
 
       local servers = opts.servers
-      local capabilities =
-        require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+      capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+      }
 
       local function setup(server)
         local server_opts = servers[server] or {}
@@ -197,11 +216,12 @@ return {
         sources = {
           -- nls.builtins.formatting.prettierd,
           nls.builtins.formatting.stylua,
-          nls.builtins.formatting.fish_indent,
           -- nls.builtins.formatting.fixjson.with({ filetypes = { "jsonc" } }),
           -- nls.builtins.formatting.eslint_d,
           -- nls.builtins.diagnostics.shellcheck,
           nls.builtins.formatting.shfmt,
+          nls.builtins.formatting.cmake_format,
+          nls.builtins.formatting.yapf,
           nls.builtins.diagnostics.markdownlint,
           -- nls.builtins.diagnostics.luacheck,
           nls.builtins.formatting.prettierd.with({
@@ -231,9 +251,15 @@ return {
     opts = {
       ensure_installed = {
         "prettierd",
+        "clangd",
         "stylua",
+        "pyright",
         "selene",
         "luacheck",
+        "lua-language-server",
+        "rust-analyzer",
+        "cmakelang",
+        "yapf",
         "eslint_d",
         "shellcheck",
         "deno",
@@ -244,6 +270,7 @@ return {
         "markdownlint",
         "debugpy",
         "codelldb",
+        "pylint",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}

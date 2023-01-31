@@ -29,7 +29,7 @@ opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true -- Round indent
 opt.shiftwidth = 2 -- Size of an indent
 opt.shortmess:append({ W = true, I = true, c = true })
-opt.showmode = false -- Dont show mode since we have a statusline
+opt.showmode = false -- Don't show mode since we have a statusline
 opt.sidescrolloff = 8 -- Columns of context
 opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 opt.smartcase = true -- Don't ignore case with capitals
@@ -40,8 +40,8 @@ opt.splitright = true -- Put new windows right of current
 opt.tabstop = 2 -- Number of spaces tabs count for
 opt.termguicolors = true -- True color support
 opt.timeoutlen = 300
-opt.undofile = true
-opt.undolevels = 10000
+opt.undofile = true -- Save undo history
+opt.undolevels = 10000 -- Max number of undo changes
 opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
@@ -69,9 +69,8 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_node_provider = 0
 
-vim.g.auto_save = 1
-
 require("util.status")
 
 -- Fix markdown indentation settings
+-- TODO:
 vim.g.markdown_recommended_style = 0

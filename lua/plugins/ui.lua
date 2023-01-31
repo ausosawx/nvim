@@ -22,6 +22,7 @@ return {
     },
   },
 
+  -- TODO:
   -- better vim.ui
   {
     "stevearc/dressing.nvim",
@@ -68,8 +69,7 @@ return {
   -- statusline
   {
     "nvim-lualine/lualine.nvim",
-    -- event = "VeryLazy",
-    event = "VimEnter",
+    event = "VeryLazy",
     opts = function(plugin)
       local icons = require("config").icons
 
@@ -101,6 +101,7 @@ return {
               },
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
+            -- TODO: symbols seem not to take effect
             { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
             -- stylua: ignore
             {
@@ -116,6 +117,7 @@ return {
               color = fg("Statement")
             },
             -- stylua: ignore
+            -- TODO:what is the effect
             {
               function() return require("noice").api.status.mode.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
@@ -160,7 +162,6 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     event = "BufReadPost",
     opts = {
-      -- char = "▏",
       char = "│",
       filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
       show_trailing_blankline_indent = false,
@@ -174,7 +175,6 @@ return {
     version = false, -- wait till new 0.7.0 release to put it back on semver
     event = "BufReadPre",
     opts = {
-      -- symbol = "▏",
       symbol = "│",
       options = { try_as_border = true },
     },
@@ -280,14 +280,6 @@ return {
     event = "VimEnter",
     opts = function()
       local dashboard = require("alpha.themes.dashboard")
-      -- local logo = [[
-      -- ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-      -- ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z
-      -- ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z
-      -- ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z
-      -- ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
-      -- ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
-      -- ]]
       local logo = [[
 ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗
 ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║
@@ -360,6 +352,7 @@ return {
     opts = { separator = " ", highlight = true, depth_limit = 5 },
   },
 
+  -- TODO:
   -- floating winbar
   {
     "b0o/incline.nvim",
@@ -374,6 +367,7 @@ return {
           },
         },
         window = { margin = { vertical = 0, horizontal = 1 } },
+        -- TODO:
         render = function(props)
           local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
           local icon, color = require("nvim-web-devicons").get_icon_color(filename)
@@ -383,6 +377,7 @@ return {
     end,
   },
 
+  -- TODO:
   -- auto-resize windows
   {
     "anuvyklack/windows.nvim",

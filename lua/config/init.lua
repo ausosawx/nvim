@@ -1,9 +1,9 @@
----@type LazyVimConfig
+---@type Config
 local M = {}
 
 M.lazy_version = ">=9.1.0"
 
----@class LazyVimConfig
+---@class Config
 local defaults = {
   -- colorscheme can be a string like `catppuccin` or a function that will load the colorscheme
   ---@type string|fun()
@@ -62,10 +62,10 @@ local defaults = {
   },
 }
 
----@type LazyVimConfig
+---@type Config
 local options
 
----@param opts? LazyVimConfig
+---@param opts? Config
 function M.setup(opts)
   options = vim.tbl_deep_extend("force", defaults, opts or {})
   if not M.has() then
@@ -131,10 +131,6 @@ function M.load(name)
       end
     end,
   })
-  if vim.bo.filetype == "lazy" then
-    -- HACK: LazyVim may have overwritten options of the Lazy ui, so reset this here
-    vim.cmd([[do VimResized]])
-  end
 end
 
 M.did_init = false
@@ -142,6 +138,7 @@ function M.init()
   if not M.did_init then
     M.did_init = true
     -- delay notifications till vim.notify was replaced or after 500ms
+    -- TODO:
     require("util").lazy_notify()
 
     -- load options here, before lazy init while sourcing plugin modules
@@ -154,9 +151,10 @@ end
 setmetatable(M, {
   __index = function(_, key)
     if options == nil then
+      vim.notify("options = nil")
       return vim.deepcopy(defaults)[key]
     end
-    ---@cast options LazyVimConfig
+    ---@cast options Config
     return options[key]
   end,
 })

@@ -14,9 +14,9 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     { import = "plugins" },
-    { import = "lazyvim.plugins.extras.lang.typescript" },
-    { import = "lazyvim.plugins.extras.lang.json" },
-    { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    { import = "plugins.extras.lang.typescript" },
+    { import = "plugins.extras.lang.json" },
+    { import = "plugins.extras.ui.mini-animate" },
   },
   defaults = { lazy = true },
   install = { colorscheme = { "tokyonight", "habamax" } },

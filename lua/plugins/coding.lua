@@ -197,10 +197,7 @@ return {
 
         local c = capture:sub(1, 1):lower()
         local lhs = (down and "]" or "[") .. (start and c or c:upper())
-        local desc = (down and "Next " or "Prev ")
-          .. (start and "start" or "end")
-          .. " of "
-          .. capture:gsub("%..*", "")
+        local desc = (down and "Next " or "Prev ") .. (start and "start" or "end") .. " of " .. capture:gsub("%..*", "")
         vim.keymap.set("n", lhs, rhs, { desc = desc })
       end
 
@@ -279,19 +276,6 @@ return {
     enabled = true,
     event = "BufReadPost",
     config = function()
-      -- vim.g.clipboard = {
-      --   name = "xsel_override",
-      --   copy = {
-      --     ["+"] = "xsel --input --clipboard",
-      --     ["*"] = "xsel --input --primary",
-      --   },
-      --   paste = {
-      --     ["+"] = "xsel --output --clipboard",
-      --     ["*"] = "xsel --output --primary",
-      --   },
-      --   cache_enabled = 1,
-      -- }
-
       require("yanky").setup({
         highlight = {
           timer = 150,

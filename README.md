@@ -1,6 +1,6 @@
 # README
 
-![ ](https://img.shields.io/badge/neovim-0.9-green?style=plastic&logo=Neovim)
+![](https://img.shields.io/badge/neovim-0.9-green?style=plastic&logo=Neovim)
 
 ## Announcement
 

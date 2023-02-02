@@ -65,43 +65,43 @@ return {
           },
         },
       }
-      if vim.g.colors_name == "catppuccin" then
-        local cp = require("catppuccin.palettes").get_palette()
-        cp.none = "NONE"
-
-        local catppuccin_hl_overwrite = {
-          highlights = require("catppuccin.groups.integrations.bufferline").get({
-            styles = { "italic", "bold" },
-            custom = {
-              mocha = {
-                -- Warnings
-                warning = { fg = cp.yellow },
-                warning_visible = { fg = cp.yellow },
-                warning_selected = { fg = cp.yellow },
-                warning_diagnostic = { fg = cp.yellow },
-                warning_diagnostic_visible = { fg = cp.yellow },
-                warning_diagnostic_selected = { fg = cp.yellow },
-                -- Infos
-                info = { fg = cp.sky },
-                info_visible = { fg = cp.sky },
-                info_selected = { fg = cp.sky },
-                info_diagnostic = { fg = cp.sky },
-                info_diagnostic_visible = { fg = cp.sky },
-                info_diagnostic_selected = { fg = cp.sky },
-                -- Hint
-                hint = { fg = cp.rosewater },
-                hint_visible = { fg = cp.rosewater },
-                hint_selected = { fg = cp.rosewater },
-                hint_diagnostic = { fg = cp.rosewater },
-                hint_diagnostic_visible = { fg = cp.rosewater },
-                hint_diagnostic_selected = { fg = cp.rosewater },
-              },
-            },
-          }),
-        }
-
-        return vim.tbl_deep_extend("force", opt, catppuccin_hl_overwrite)
-      end
+      -- if vim.g.colors_name == "catppuccin" then
+      --   local cp = require("catppuccin.palettes").get_palette()
+      --   cp.none = "NONE"
+      --
+      --   local catppuccin_hl_overwrite = {
+      --     highlights = require("catppuccin.groups.integrations.bufferline").get({
+      --       styles = { "italic", "bold" },
+      --       custom = {
+      --         mocha = {
+      --           -- Warnings
+      --           warning = { fg = cp.sky },
+      --           warning_visible = { fg = cp.sky },
+      --           warning_selected = { fg = cp.sky },
+      --           warning_diagnostic = { fg = cp.sky },
+      --           warning_diagnostic_visible = { fg = cp.sky },
+      --           warning_diagnostic_selected = { fg = cp.sky },
+      --           -- Infos
+      --           info = { fg = cp.yellow },
+      --           info_visible = { fg = cp.yellow },
+      --           info_selected = { fg = cp.yellow },
+      --           info_diagnostic = { fg = cp.yellow },
+      --           info_diagnostic_visible = { fg = cp.yellow },
+      --           info_diagnostic_selected = { fg = cp.yellow },
+      --           -- Hint
+      --           hint = { fg = cp.rosewater },
+      --           hint_visible = { fg = cp.rosewater },
+      --           hint_selected = { fg = cp.rosewater },
+      --           hint_diagnostic = { fg = cp.rosewater },
+      --           hint_diagnostic_visible = { fg = cp.rosewater },
+      --           hint_diagnostic_selected = { fg = cp.rosewater },
+      --         },
+      --       },
+      --     }),
+      --   }
+      --
+      --   return vim.tbl_deep_extend("force", opt, catppuccin_hl_overwrite)
+      -- end
       return opt
     end,
     config = function(_, opts)
@@ -144,7 +144,6 @@ return {
               },
             },
             { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
-            -- TODO: symbols seem not to take effect
             { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
             -- stylua: ignore
             {

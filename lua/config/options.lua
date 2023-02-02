@@ -72,5 +72,4 @@ vim.g.loaded_node_provider = 0
 require("util.status")
 
 -- Fix markdown indentation settings
--- TODO:
 vim.g.markdown_recommended_style = 0

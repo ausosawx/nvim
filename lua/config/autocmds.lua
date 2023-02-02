@@ -106,3 +106,75 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
   end,
   nested = true,
 })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = vim.api.nvim_create_augroup("ColorChange", { clear = true }),
+  callback = function()
+    vim.cmd([[hi clear BufferLineWarning]])
+    vim.cmd([[hi clear BufferLineWarningSelected]])
+    vim.cmd([[hi clear BufferLineWarningVisible]])
+    vim.cmd([[hi clear BufferLineWarningDiagnostic]])
+    vim.cmd([[hi clear BufferLineWarningDiagnosticSelected]])
+    vim.cmd([[hi clear BufferLineWarningDiagnosticVisible]])
+    local opt = {
+      options = {
+        diagnostics = "nvim_lsp",
+        always_show_bufferline = false,
+        diagnostics_indicator = function(_, _, diag)
+          local icons = require("config").icons.diagnostics
+          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+            .. (diag.warning and icons.Warn .. diag.warning or "")
+          return vim.trim(ret)
+        end,
+        offsets = {
+          {
+            filetype = "neo-tree",
+            text = "Neo-tree",
+            highlight = "Directory",
+            text_align = "left",
+          },
+        },
+      },
+    }
+
+    if vim.g.colors_name == "catppuccin" then
+      local cp = require("catppuccin.palettes").get_palette()
+      cp.none = "NONE"
+
+      local catppuccin_hl_overwrite = {
+        highlights = require("catppuccin.groups.integrations.bufferline").get({
+          styles = { "italic", "bold" },
+          custom = {
+            mocha = {
+              -- Warnings
+              warning = { fg = cp.sky },
+              warning_visible = { fg = cp.sky },
+              warning_selected = { fg = cp.sky },
+              warning_diagnostic = { fg = cp.sky },
+              warning_diagnostic_visible = { fg = cp.sky },
+              warning_diagnostic_selected = { fg = cp.sky },
+              -- Infos
+              info = { fg = cp.yellow },
+              info_visible = { fg = cp.yellow },
+              info_selected = { fg = cp.yellow },
+              info_diagnostic = { fg = cp.yellow },
+              info_diagnostic_visible = { fg = cp.yellow },
+              info_diagnostic_selected = { fg = cp.yellow },
+              -- Hint
+              hint = { fg = cp.rosewater },
+              hint_visible = { fg = cp.rosewater },
+              hint_selected = { fg = cp.rosewater },
+              hint_diagnostic = { fg = cp.rosewater },
+              hint_diagnostic_visible = { fg = cp.rosewater },
+              hint_diagnostic_selected = { fg = cp.rosewater },
+            },
+          },
+        }),
+      }
+
+      local opts = vim.tbl_deep_extend("force", opt, catppuccin_hl_overwrite)
+
+      require("bufferline").setup(opts)
+    end
+  end,
+})

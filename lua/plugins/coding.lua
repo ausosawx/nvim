@@ -24,6 +24,25 @@ return {
       },
       { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
       { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+      {
+        "<leader>se",
+        function()
+          require("luasnip.loaders").edit_snippet_files({
+            format = function(path, _)
+              path = path:gsub(vim.pesc(vim.fn.stdpath("data") .. "/lazy"), "$PLUGINS")
+              if vim.env.HOME then
+                path = path:gsub(vim.pesc(vim.env.HOME .. "/.dotfiles/nvim"), "$CONFIG")
+              end
+              path = path:gsub(vim.pesc(vim.fn.getcwd()), "$CWD")
+              return path
+            end,
+            edit = function(file)
+              vim.cmd("tabnew " .. file)
+            end,
+          })
+        end,
+        desc = "Edit snippet"
+      },
     },
   },
 
@@ -31,16 +50,33 @@ return {
   {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdlineEnter" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-emoji",
+      "kdheepak/cmp-latex-symbols",
     },
     opts = function()
       local cmp = require("cmp")
+
+      cmp.setup.cmdline({ "/", "?" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+          { name = "cmdline" },
+        }),
+      })
       return {
         completion = {
           completeopt = "menu,menuone,noinsert",
@@ -53,22 +89,41 @@ return {
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-e>"] = cmp.mapping.abort(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<C-e>"] = cmp.mapping(function()
+            return cmp.visible() and cmp.abort() or cmp.complete()
+          end, { "i", "c" }),
+          ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
+          { name = "latex_symbols" },
         }),
         formatting = {
-          format = function(_, item)
+          fields = { "kind", "abbr", "menu" },
+          format = function(entry, item)
+            -- limit the max width of windows
+            local ELLIPSIS_CHAR = "…"
+            local MAX_LABEL_WIDTH = 30
+            local content = item.abbr
+            if #content > MAX_LABEL_WIDTH then
+              item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. ELLIPSIS_CHAR
+            end
+            -- Kind icons
             local icons = require("config").icons.kinds
             if icons[item.kind] then
-              item.kind = icons[item.kind] .. item.kind
+              item.kind = icons[item.kind]
             end
+            -- Source
+            item.menu = ({
+              buffer = "[Buf]",
+              nvim_lsp = "[LSP]",
+              luasnip = "[Snip]",
+              path = "[PATH]",
+              latex_symbols = "[TEX]",
+            })[entry.source.name]
             return item
           end,
         },

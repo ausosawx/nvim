@@ -44,33 +44,76 @@ return {
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
-    opts = {
-      options = {
-        diagnostics = "nvim_lsp",
-        always_show_bufferline = false,
-        diagnostics_indicator = function(_, _, diag)
-          local icons = require("config").icons.diagnostics
-          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-            .. (diag.warning and icons.Warn .. diag.warning or "")
-          return vim.trim(ret)
-        end,
-        offsets = {
-          {
-            filetype = "neo-tree",
-            text = "Neo-tree",
-            highlight = "Directory",
-            text_align = "left",
+    opts = function()
+      local opt = {
+        options = {
+          diagnostics = "nvim_lsp",
+          always_show_bufferline = false,
+          diagnostics_indicator = function(_, _, diag)
+            local icons = require("config").icons.diagnostics
+            local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+              .. (diag.warning and icons.Warn .. diag.warning or "")
+            return vim.trim(ret)
+          end,
+          offsets = {
+            {
+              filetype = "neo-tree",
+              text = "Neo-tree",
+              highlight = "Directory",
+              text_align = "left",
+            },
           },
         },
-      },
-    },
+      }
+      if vim.g.colors_name == "catppuccin" then
+        local cp = require("catppuccin.palettes").get_palette()
+        cp.none = "NONE"
+
+        local catppuccin_hl_overwrite = {
+          highlights = require("catppuccin.groups.integrations.bufferline").get({
+            styles = { "italic", "bold" },
+            custom = {
+              mocha = {
+                -- Warnings
+                warning = { fg = cp.yellow },
+                warning_visible = { fg = cp.yellow },
+                warning_selected = { fg = cp.yellow },
+                warning_diagnostic = { fg = cp.yellow },
+                warning_diagnostic_visible = { fg = cp.yellow },
+                warning_diagnostic_selected = { fg = cp.yellow },
+                -- Infos
+                info = { fg = cp.sky },
+                info_visible = { fg = cp.sky },
+                info_selected = { fg = cp.sky },
+                info_diagnostic = { fg = cp.sky },
+                info_diagnostic_visible = { fg = cp.sky },
+                info_diagnostic_selected = { fg = cp.sky },
+                -- Hint
+                hint = { fg = cp.rosewater },
+                hint_visible = { fg = cp.rosewater },
+                hint_selected = { fg = cp.rosewater },
+                hint_diagnostic = { fg = cp.rosewater },
+                hint_diagnostic_visible = { fg = cp.rosewater },
+                hint_diagnostic_selected = { fg = cp.rosewater },
+              },
+            },
+          }),
+        }
+
+        return vim.tbl_deep_extend("force", opt, catppuccin_hl_overwrite)
+      end
+      return opt
+    end,
+    config = function(_, opts)
+      require("bufferline").setup(opts)
+    end,
   },
 
   -- statusline
   {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
-    opts = function(plugin)
+    opts = function()
       local icons = require("config").icons
 
       local function fg(name)

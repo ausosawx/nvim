@@ -37,6 +37,7 @@ return {
       servers = {
         jsonls = {},
         ansiblels = {},
+        julials = {},
         bashls = {},
         clangd = {},
         denols = {},
@@ -251,18 +252,13 @@ return {
     opts = {
       ensure_installed = {
         "prettierd",
-        "clangd",
         "stylua",
-        "pyright",
         "selene",
         "luacheck",
-        "lua-language-server",
-        "rust-analyzer",
         "cmakelang",
         "yapf",
         "eslint_d",
         "shellcheck",
-        "deno",
         "shfmt",
         "black",
         "isort",

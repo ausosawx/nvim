@@ -59,9 +59,12 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-emoji",
       "kdheepak/cmp-latex-symbols",
+      "lukas-reineke/cmp-under-comparator",
+      { "jcdickinson/codeium.nvim", config = true },
     },
     opts = function()
       local cmp = require("cmp")
+      local compare = require("cmp.config.compare")
 
       cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
@@ -94,12 +97,25 @@ return {
           end, { "i", "c" }),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
         }),
+        sorting = {
+          comparators = {
+            compare.offset,
+            compare.exact,
+            compare.score,
+            require("cmp-under-comparator").under,
+            compare.kind,
+            compare.sort_text,
+            compare.length,
+            compare.order,
+          },
+        },
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
           { name = "latex_symbols" },
+          { name = "codeium" },
         }),
         formatting = {
           fields = { "kind", "abbr", "menu" },
@@ -123,6 +139,7 @@ return {
               luasnip = "[Snip]",
               path = "[PATH]",
               latex_symbols = "[TEX]",
+              codeium = "[AI]",
             })[entry.source.name]
             return item
           end,

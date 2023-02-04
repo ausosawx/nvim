@@ -4,6 +4,16 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local opt = vim.opt
+local o = vim.o
+
+-- Compatible with windows
+if jit.os:find("Windows") then
+  o.shell = vim.fn.executable("pwsh") and "pwsh" or "powershell"
+  o.shellcmdflag =
+    "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+  o.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+  o.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+end
 
 opt.autowrite = true -- Enable auto write
 opt.clipboard = "unnamedplus" -- Sync with system clipboard

@@ -280,6 +280,11 @@ return {
         if not p:is_installed() then
           p:install()
         end
+        -- p:check_new_version(function(success, _)
+        --   if success then
+        --     p:install()
+        --   end
+        -- end)
       end
     end,
   },

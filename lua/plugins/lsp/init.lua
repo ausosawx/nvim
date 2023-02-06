@@ -217,6 +217,7 @@ return {
         sources = {
           -- nls.builtins.formatting.prettierd,
           nls.builtins.formatting.stylua,
+          nls.builtins.formatting.yamlfmt,
           -- nls.builtins.formatting.fixjson.with({ filetypes = { "jsonc" } }),
           -- nls.builtins.formatting.eslint_d,
           -- nls.builtins.diagnostics.shellcheck,
@@ -267,6 +268,7 @@ return {
         "debugpy",
         "codelldb",
         "pylint",
+        "yamlfmt",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}

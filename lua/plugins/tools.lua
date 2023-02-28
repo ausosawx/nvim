@@ -36,6 +36,16 @@ return {
     },
     opts = { theme = "light" },
   },
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   build = function()
+  --     vim.fn["mkdp#util#install"]()
+  --   end,
+  --   keys = {
+  --     { "<leader>op", "<Plug>MarkdownPreviewToggle", desc = "Peek (Markdown Preview)" },
+  --   },
+  --   ft = "markdown",
+  -- },
 
   -- better diffing
   {

@@ -24,7 +24,7 @@ return {
     build = ":TSUpdate",
     event = "BufReadPost",
     keys = {
-      { "<c-space>", desc = "Increment selection" },
+      { "gn", desc = "Increment selection" },
       { "<bs>", desc = "Schrink selection", mode = "x" },
     },
     opts = {
@@ -75,8 +75,7 @@ return {
         "yaml",
         "json",
       },
-      highlight = { enable = true },
-      -- TODO:
+      highlight = { enable = true, disable = { "latex" } },
       query_linter = {
         enable = true,
         use_virtual_text = true,
@@ -85,8 +84,8 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
+          init_selection = "gnn",
+          node_incremental = "gnr",
           scope_incremental = "<nop>",
           node_decremental = "<bs>",
         },

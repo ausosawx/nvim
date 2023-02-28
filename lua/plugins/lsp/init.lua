@@ -75,7 +75,7 @@ return {
           },
         },
         yamlls = {},
-        sumneko_lua = {
+        lua_ls = {
           single_file_support = true,
           settings = {
             Lua = {
@@ -218,6 +218,7 @@ return {
           -- nls.builtins.formatting.prettierd,
           nls.builtins.formatting.stylua,
           nls.builtins.formatting.yamlfmt,
+          nls.builtins.formatting.latexindent,
           -- nls.builtins.formatting.fixjson.with({ filetypes = { "jsonc" } }),
           -- nls.builtins.formatting.eslint_d,
           -- nls.builtins.diagnostics.shellcheck,
@@ -269,6 +270,7 @@ return {
         "codelldb",
         "pylint",
         "yamlfmt",
+        "latexindent",
       },
     },
     ---@param opts MasonSettings | {ensure_installed: string[]}

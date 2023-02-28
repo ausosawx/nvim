@@ -58,8 +58,8 @@ return {
       "hrsh7th/cmp-cmdline",
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-emoji",
-      "kdheepak/cmp-latex-symbols",
       "lukas-reineke/cmp-under-comparator",
+      "hrsh7th/cmp-omni",
       { "jcdickinson/codeium.nvim", config = true },
     },
     opts = function()
@@ -114,7 +114,6 @@ return {
           { name = "luasnip" },
           { name = "buffer" },
           { name = "path" },
-          { name = "latex_symbols" },
           { name = "codeium" },
         }),
         formatting = {
@@ -138,7 +137,6 @@ return {
               nvim_lsp = "[LSP]",
               luasnip = "[Snip]",
               path = "[PATH]",
-              latex_symbols = "[TEX]",
               codeium = "[AI]",
             })[entry.source.name]
             return item
@@ -339,9 +337,6 @@ return {
   -- better yank/paste
   {
     "kkharji/sqlite.lua",
-    enabled = function()
-      return not jit.os:find("Windows")
-    end,
   },
   {
     "gbprod/yanky.nvim",
@@ -353,7 +348,7 @@ return {
           timer = 150,
         },
         ring = {
-          storage = jit.os:find("Windows") and "shada" or "sqlite",
+          storage = "sqlite",
         },
       })
 
@@ -412,5 +407,15 @@ return {
     "simrat39/symbols-outline.nvim",
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
     config = true,
+  },
+
+  {
+    "lervag/vimtex",
+    lazy = false,
+    config = function()
+      vim.g.vimtex_view_method = "zathura"
+      vim.g.tex_flavor = "latex"
+      vim.g.tex_conceal = "abdmg"
+    end,
   },
 }

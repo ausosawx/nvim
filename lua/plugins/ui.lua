@@ -1,5 +1,5 @@
 return {
-  -- Better `vim.notify()`
+  -- better `vim.notify()`
   {
     "rcarriga/nvim-notify",
     keys = {
@@ -22,7 +22,6 @@ return {
     },
   },
 
-  -- TODO:
   -- better vim.ui
   {
     "stevearc/dressing.nvim",
@@ -44,69 +43,26 @@ return {
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
-    opts = function()
-      local opt = {
-        options = {
-          diagnostics = "nvim_lsp",
-          always_show_bufferline = false,
-          diagnostics_indicator = function(_, _, diag)
-            local icons = require("config").icons.diagnostics
-            local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-              .. (diag.warning and icons.Warn .. diag.warning or "")
-            return vim.trim(ret)
-          end,
-          offsets = {
-            {
-              filetype = "neo-tree",
-              text = "Neo-tree",
-              highlight = "Directory",
-              text_align = "left",
-            },
+    opts = {
+      options = {
+        diagnostics = "nvim_lsp",
+        always_show_bufferline = false,
+        diagnostics_indicator = function(_, _, diag)
+          local icons = require("config").icons.diagnostics
+          local ret = (diag.error and icons.Error .. diag.error .. " " or "")
+            .. (diag.warning and icons.Warn .. diag.warning or "")
+          return vim.trim(ret)
+        end,
+        offsets = {
+          {
+            filetype = "neo-tree",
+            text = "Neo-tree",
+            highlight = "Directory",
+            text_align = "left",
           },
         },
-      }
-      -- if vim.g.colors_name == "catppuccin" then
-      --   local cp = require("catppuccin.palettes").get_palette()
-      --   cp.none = "NONE"
-      --
-      --   local catppuccin_hl_overwrite = {
-      --     highlights = require("catppuccin.groups.integrations.bufferline").get({
-      --       styles = { "italic", "bold" },
-      --       custom = {
-      --         mocha = {
-      --           -- Warnings
-      --           warning = { fg = cp.sky },
-      --           warning_visible = { fg = cp.sky },
-      --           warning_selected = { fg = cp.sky },
-      --           warning_diagnostic = { fg = cp.sky },
-      --           warning_diagnostic_visible = { fg = cp.sky },
-      --           warning_diagnostic_selected = { fg = cp.sky },
-      --           -- Infos
-      --           info = { fg = cp.yellow },
-      --           info_visible = { fg = cp.yellow },
-      --           info_selected = { fg = cp.yellow },
-      --           info_diagnostic = { fg = cp.yellow },
-      --           info_diagnostic_visible = { fg = cp.yellow },
-      --           info_diagnostic_selected = { fg = cp.yellow },
-      --           -- Hint
-      --           hint = { fg = cp.rosewater },
-      --           hint_visible = { fg = cp.rosewater },
-      --           hint_selected = { fg = cp.rosewater },
-      --           hint_diagnostic = { fg = cp.rosewater },
-      --           hint_diagnostic_visible = { fg = cp.rosewater },
-      --           hint_diagnostic_selected = { fg = cp.rosewater },
-      --         },
-      --       },
-      --     }),
-      --   }
-      --
-      --   return vim.tbl_deep_extend("force", opt, catppuccin_hl_overwrite)
-      -- end
-      return opt
-    end,
-    config = function(_, opts)
-      require("bufferline").setup(opts)
-    end,
+      },
+    },
   },
 
   -- statusline
@@ -159,7 +115,7 @@ return {
               color = fg("Statement")
             },
             -- stylua: ignore
-            -- TODO:what is the effect
+            -- TODO: What is the effect?
             {
               function() return require("noice").api.status.mode.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
@@ -232,6 +188,7 @@ return {
   },
 
   -- noice
+  -- TODO: figure out the config
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -317,6 +274,7 @@ return {
   },
 
   -- dashboard
+  -- TODO:
   {
     "goolord/alpha-nvim",
     event = "VimEnter",
@@ -434,28 +392,6 @@ return {
       vim.o.equalalways = false
       require("windows").setup({
         animation = { enable = false, duration = 150 },
-      })
-    end,
-  },
-
-  -- scrollbar
-  {
-    "petertriho/nvim-scrollbar",
-    event = "BufReadPost",
-    config = function()
-      local scrollbar = require("scrollbar")
-      local colors = require("tokyonight.colors").setup()
-      scrollbar.setup({
-        handle = { color = colors.bg_highlight },
-        excluded_filetypes = { "prompt", "TelescopePrompt", "noice", "notify" },
-        marks = {
-          Search = { color = colors.orange },
-          Error = { color = colors.error },
-          Warn = { color = colors.warning },
-          Info = { color = colors.info },
-          Hint = { color = colors.hint },
-          Misc = { color = colors.purple },
-        },
       })
     end,
   },

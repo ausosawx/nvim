@@ -409,6 +409,7 @@ return {
     config = true,
   },
 
+  -- nice tex
   {
     "lervag/vimtex",
     lazy = false,
@@ -417,5 +418,18 @@ return {
       vim.g.tex_flavor = "latex"
       vim.g.tex_conceal = "abdmg"
     end,
+  },
+
+  -- chatgpt
+  {
+    "jackMort/ChatGPT.nvim",
+    keys = {
+      {
+        "<leader>cg",
+        "<cmd>ChatGPT<cr>",
+        desc = "ChatGPT Interactive",
+      },
+    },
+    config = true,
   },
 }

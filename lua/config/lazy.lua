@@ -14,7 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     { import = "plugins" },
-    { import = "plugins.extras.lang.typescript" },
     { import = "plugins.extras.lang.json" },
     { import = "plugins.extras.ui.mini-animate" },
   },

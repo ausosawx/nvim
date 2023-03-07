@@ -1,6 +1,6 @@
 return {
 
-  -- snippets
+  -- Snippets
   {
     "L3MON4D3/LuaSnip",
     dependencies = {
@@ -13,8 +13,8 @@ return {
       history = true,
       delete_check_events = "TextChanged",
     },
-    -- stylua: ignore
     keys = {
+    -- stylua: ignore
       {
         "<tab>",
         function()
@@ -22,7 +22,9 @@ return {
         end,
         expr = true, silent = true, mode = "i",
       },
+    -- stylua: ignore
       { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
+    -- stylua: ignore
       { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
       {
         "<leader>se",
@@ -41,12 +43,12 @@ return {
             end,
           })
         end,
-        desc = "Edit snippet"
+        desc = "Edit snippet",
       },
     },
   },
 
-  -- auto completion
+  -- Completion
   {
     "hrsh7th/nvim-cmp",
     version = false, -- last release is way too old
@@ -59,7 +61,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-emoji",
       "lukas-reineke/cmp-under-comparator",
-      "hrsh7th/cmp-omni",
+      "hrsh7th/cmp-omni", -- vimtex source
       { "jcdickinson/codeium.nvim", config = true },
     },
     opts = function()
@@ -119,7 +121,7 @@ return {
         formatting = {
           fields = { "kind", "abbr", "menu" },
           format = function(entry, item)
-            -- limit the max width of windows
+            -- Limit the max width of windows
             local ELLIPSIS_CHAR = "…"
             local MAX_LABEL_WIDTH = 30
             local content = item.abbr
@@ -151,7 +153,7 @@ return {
     end,
   },
 
-  -- auto pairs
+  -- Auto pairs
   {
     "echasnovski/mini.pairs",
     event = "VeryLazy",
@@ -160,7 +162,7 @@ return {
     end,
   },
 
-  -- surround
+  -- Surround
   {
     "echasnovski/mini.surround",
     keys = function(plugin, keys)
@@ -189,12 +191,12 @@ return {
       },
     },
     config = function(_, opts)
-      -- use gz mappings instead of s to prevent conflict with leap
+      -- Use gz mappings instead of s to prevent conflict with leap
       require("mini.surround").setup(opts)
     end,
   },
 
-  -- comments
+  -- Comments
   { "JoosepAlviste/nvim-ts-context-commentstring" },
   {
     "echasnovski/mini.comment",
@@ -211,7 +213,8 @@ return {
     end,
   },
 
-  -- better text-objects
+  -- Better text-objects
+  -- TODO:
   {
     "echasnovski/mini.ai",
     keys = {
@@ -297,6 +300,7 @@ return {
     end,
   },
 
+  -- Better annotation generator
   {
     "danymat/neogen",
     keys = {
@@ -311,12 +315,14 @@ return {
     opts = { snippet_engine = "luasnip" },
   },
 
+  -- LSP renaming
   {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
     config = true,
   },
 
+  -- Good automated refactorings
   {
     "ThePrimeagen/refactoring.nvim",
     keys = {
@@ -329,12 +335,13 @@ return {
         noremap = true,
         silent = true,
         expr = false,
+        desc = "Code refactoring",
       },
     },
     opts = {},
   },
 
-  -- better yank/paste
+  -- Better yank/paste
   {
     "kkharji/sqlite.lua",
   },
@@ -342,6 +349,33 @@ return {
     "gbprod/yanky.nvim",
     enabled = true,
     event = "BufReadPost",
+    keys = {
+      { "y", "<Plug>(YankyYank)", mode = { "n", "x" } },
+      { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" } },
+      { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" } },
+      { "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" } },
+      { "gP", "<Plug>(YankyGPutBefore)", mode = { "n", "x" } },
+      { "<c-n>", "<Plug>(YankyCycleForward)" },
+      { "<c-p>", "<Plug>(YankyCycleBackward)" },
+      { "]p", "<Plug>(YankyPutIndentAfterLinewise)" },
+      { "[p", "<Plug>(YankyPutIndentBeforeLinewise)" },
+      { "]P", "<Plug>(YankyPutIndentAfterLinewise)" },
+      { "[P", "<Plug>(YankyPutIndentBeforeLinewise)" },
+      { ">p", "<Plug>(YankyPutIndentAfterShiftRight)" },
+      { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)" },
+      { ">P", "<Plug>(YankyPutIndentBeforeShiftRight)" },
+      { "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)" },
+      { "=p", "<Plug>(YankyPutAfterFilter)" },
+      { "=P", "<Plug>(YankyPutBeforeFilter)" },
+      -- stylua: ignore
+      {
+        "<leader>P",
+        function()
+          require("telescope").extensions.yank_history.yank_history({})
+        end,
+        mode = "n", desc = "Paste from Yanky",
+      },
+    },
     config = function()
       require("yanky").setup({
         highlight = {
@@ -351,37 +385,10 @@ return {
           storage = "sqlite",
         },
       })
-
-      vim.keymap.set({ "n", "x" }, "y", "<Plug>(YankyYank)")
-
-      vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-      vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-      vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
-      vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
-
-      vim.keymap.set("n", "<c-n>", "<Plug>(YankyCycleForward)")
-      vim.keymap.set("n", "<c-p>", "<Plug>(YankyCycleBackward)")
-
-      vim.keymap.set("n", "]p", "<Plug>(YankyPutIndentAfterLinewise)")
-      vim.keymap.set("n", "[p", "<Plug>(YankyPutIndentBeforeLinewise)")
-      vim.keymap.set("n", "]P", "<Plug>(YankyPutIndentAfterLinewise)")
-      vim.keymap.set("n", "[P", "<Plug>(YankyPutIndentBeforeLinewise)")
-
-      vim.keymap.set("n", ">p", "<Plug>(YankyPutIndentAfterShiftRight)")
-      vim.keymap.set("n", "<p", "<Plug>(YankyPutIndentAfterShiftLeft)")
-      vim.keymap.set("n", ">P", "<Plug>(YankyPutIndentBeforeShiftRight)")
-      vim.keymap.set("n", "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)")
-
-      vim.keymap.set("n", "=p", "<Plug>(YankyPutAfterFilter)")
-      vim.keymap.set("n", "=P", "<Plug>(YankyPutBeforeFilter)")
-
-      vim.keymap.set("n", "<leader>P", function()
-        require("telescope").extensions.yank_history.yank_history({})
-      end, { desc = "Paste from Yanky" })
     end,
   },
 
-  -- better increase/descrease
+  -- Better increase/descrease
   {
     "monaqa/dial.nvim",
     -- stylua: ignore
@@ -403,13 +410,14 @@ return {
     end,
   },
 
+  -- A tree like view for symbols
   {
     "simrat39/symbols-outline.nvim",
     keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
     config = true,
   },
 
-  -- nice tex
+  -- Nice tex
   {
     "lervag/vimtex",
     lazy = false,
@@ -420,15 +428,11 @@ return {
     end,
   },
 
-  -- chatgpt
+  -- Chatgpt
   {
     "jackMort/ChatGPT.nvim",
     keys = {
-      {
-        "<leader>cg",
-        "<cmd>ChatGPT<cr>",
-        desc = "ChatGPT Interactive",
-      },
+      { "<leader>cg", "<cmd>ChatGPT<cr>", desc = "ChatGPT Interactive" },
     },
     config = true,
   },

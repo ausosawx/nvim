@@ -1,6 +1,7 @@
 return {
 
-  -- neorg
+  -- Neorg
+  -- TODO:
   {
     "nvim-neorg/neorg",
     ft = "norg",
@@ -16,7 +17,7 @@ return {
     },
   },
 
-  -- markdown preview
+  -- Markdown preview
   {
     "toppair/peek.nvim",
     build = "deno task --quiet build:fast",
@@ -48,7 +49,7 @@ return {
     ft = "markdown",
   },
 
-  -- better diffing
+  -- Better diffing
   {
     "sindrets/diffview.nvim",
     cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
@@ -56,7 +57,7 @@ return {
     keys = { { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "DiffView" } },
   },
 
-  -- colorizer
+  -- Colorizer
   {
     "NvChad/nvim-colorizer.lua",
     event = "BufReadPre",

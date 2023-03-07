@@ -2,7 +2,7 @@ local Util = require("util")
 
 return {
 
-  -- file explorer
+  -- File explorer
   {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
@@ -24,9 +24,6 @@ return {
       { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
       { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
     },
-    deactivate = function()
-      vim.cmd([[Neotree close]])
-    end,
     init = function()
       vim.g.neo_tree_remove_legacy_commands = 1
       if vim.fn.argc() == 1 then
@@ -44,7 +41,7 @@ return {
     },
   },
 
-  -- search/replace in multiple files
+  -- Search/replace in multiple files
   {
     "windwp/nvim-spectre",
     -- stylua: ignore
@@ -53,7 +50,7 @@ return {
     },
   },
 
-  -- fuzzy finder
+  -- Fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -158,7 +155,7 @@ return {
     },
   },
 
-  -- easily jump to any location and enhanced f/t motions for Leap
+  -- Easily jump to any location and enhanced f/t motions for Leap
   {
     "ggandor/leap.nvim",
     event = "VeryLazy",
@@ -172,7 +169,7 @@ return {
     end,
   },
 
-  -- which-key
+  -- Which-key
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -191,9 +188,11 @@ return {
         ["<leader><tab>"] = { name = "+tabs" },
         ["<leader>b"] = { name = "+buffer" },
         ["<leader>c"] = { name = "+code" },
+        ["<leader>d"] = { name = "+dap" },
         ["<leader>f"] = { name = "+file/find" },
         ["<leader>g"] = { name = "+git" },
         ["<leader>gh"] = { name = "+hunks" },
+        ["<leader>l"] = { name = "+lazy/vimtex" },
         ["<leader>q"] = { name = "+quit/session" },
         ["<leader>s"] = { name = "+search" },
         ["<leader>sn"] = { name = "+noice" },
@@ -204,7 +203,7 @@ return {
     end,
   },
 
-  -- git signs
+  -- Git signs
   {
     "lewis6991/gitsigns.nvim",
     event = "BufReadPre",
@@ -238,11 +237,12 @@ return {
         map("n", "<leader>ghd", gs.diffthis, "Diff This")
         map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+        -- stylua: ignore end
       end,
     },
   },
 
-  -- buffer remove
+  -- Buffer remove
   {
     "echasnovski/mini.bufremove",
     -- stylua: ignore
@@ -252,7 +252,7 @@ return {
     },
   },
 
-  -- better diagnostics list and others
+  -- Better diagnostics list and others
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
@@ -263,7 +263,7 @@ return {
     },
   },
 
-  -- todo comments
+  -- Todo comments
   {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
@@ -279,13 +279,12 @@ return {
     },
   },
 
-  -- add nvim-ufo
+  -- Modern flod
   {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
     event = "BufReadPost",
     opts = {},
-
     init = function()
       -- Using ufo provider need remap `zR` and `zM`.
       vim.keymap.set("n", "zR", function()

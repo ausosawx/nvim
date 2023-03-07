@@ -1,57 +1,28 @@
 local M = {
   "mfussenegger/nvim-dap",
-
   dependencies = {
     {
       "rcarriga/nvim-dap-ui",
-
       config = function()
         require("dapui").setup()
       end,
     },
   },
+  -- stylua: ignore
+  keys = {
+    { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+    { "<leader>dc", function() require("dap").clear_breakpoints() end, desc = "Clear Breakpoints" },
+    { "<F5>", function() require("dap").continue() end, desc = "Continue" },
+    { "<F6>", function() require("dap").step_into() end, desc = "Step Into" },
+    { "<F7>", function() require("dap").step_over() end, desc = "Step Over" },
+    { "<F8>", function() require("dap").step_out() end, desc = "Step Out" },
+    { "<F9>", function() require("dap").run_last() end, desc = "Rerun Dap" },
+    { "<F10>", function() require("dap").terminate() end, desc = "Close Dap" },
+    { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+    { "<leader>dr", function() require("dap").repl.open() end, desc = "Repl" },
+    { "<leader>du", function() require("dapui").toggle({ }) end, desc = "Dap UI" },
+  },
 }
-
-function M.init()
-  vim.keymap.set("n", "<leader>db", function()
-    require("dap").toggle_breakpoint()
-  end, { desc = "Toggle Breakpoint" })
-
-  vim.keymap.set("n", "<leader>dc", function()
-    require("dap").clear_breakpoints()
-  end, { desc = "Clear Breakpoints" })
-
-  vim.keymap.set("n", "<F5>", function()
-    require("dap").continue()
-  end, { desc = "Continue" })
-  vim.keymap.set("n", "<F6>", function()
-    require("dap").step_into()
-  end, { desc = "Step Into" })
-  vim.keymap.set("n", "<F7>", function()
-    require("dap").step_over()
-  end, { desc = "Step Over" })
-  vim.keymap.set("n", "<F8>", function()
-    require("dap").step_out()
-  end, { desc = "Step Out" })
-  vim.keymap.set("n", "<F9>", function()
-    require("dap").run_last()
-  end, { desc = "Rerun Dap" })
-  vim.keymap.set("n", "<F10>", function()
-    require("dap").terminate()
-  end, { desc = "Close Dap" })
-
-  vim.keymap.set("n", "<leader>dw", function()
-    require("dap.ui.widgets").hover()
-  end, { desc = "Widgets" })
-
-  vim.keymap.set("n", "<leader>dr", function()
-    require("dap").repl.open()
-  end, { desc = "Repl" })
-
-  vim.keymap.set("n", "<leader>du", function()
-    require("dapui").toggle({})
-  end, { desc = "Dap UI" })
-end
 
 function M.config()
   local dap = require("dap")

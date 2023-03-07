@@ -1,5 +1,5 @@
 return {
-  "folke/twilight.nvim",
+  -- Split or join blocks of code
   {
     "Wansmer/treesj",
     keys = {
@@ -8,6 +8,7 @@ return {
     opts = { use_default_keymaps = false, max_join_length = 150 },
   },
 
+  -- Structural search and replace
   {
     "cshuaimin/ssr.nvim",
     keys = {
@@ -22,9 +23,11 @@ return {
     },
   },
 
+  -- Focus on your code
   {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
+    dependencies = { "folke/twilight.nvim" },
     opts = {
       plugins = {
         gitsigns = true,

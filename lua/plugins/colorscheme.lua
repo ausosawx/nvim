@@ -11,10 +11,8 @@ return {
         style = "moon",
         sidebars = {
           "qf",
-          "vista_kind",
           "terminal",
           "spectre_panel",
-          "startuptime",
           "Outline",
         },
         on_highlights = function(hl, c)

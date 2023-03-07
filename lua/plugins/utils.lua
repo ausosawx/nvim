@@ -1,5 +1,5 @@
 return {
-  -- session management
+  -- Session management
   {
     "folke/persistence.nvim",
     event = "BufReadPre",

@@ -81,4 +81,10 @@ return {
       },
     },
   },
+
+  -- Vimdoc-cn
+  {
+    "yianwillis/vimcdoc",
+    event = "BufReadPost",
+  },
 }

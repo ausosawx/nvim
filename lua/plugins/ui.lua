@@ -206,17 +206,6 @@ return {
       { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll backward"},
     },
     config = function()
-      local focused = true
-      vim.api.nvim_create_autocmd("FocusGained", {
-        callback = function()
-          focused = true
-        end,
-      })
-      vim.api.nvim_create_autocmd("FocusLost", {
-        callback = function()
-          focused = false
-        end,
-      })
       require("noice").setup({
         debug = false,
         lsp = {
@@ -227,15 +216,6 @@ return {
           },
         },
         routes = {
-          {
-            filter = {
-              cond = function()
-                return not focused
-              end,
-            },
-            view = "notify_send",
-            opts = { stop = false },
-          },
           {
             filter = {
               event = "msg_show",

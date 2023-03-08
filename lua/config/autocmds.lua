@@ -1,20 +1,30 @@
 -- This file is automatically loaded by config.init()
 -- Triggered in plugins.colorscheme.lua
 
--- Check if we need to reload the file when it changed
+-- check if we need to reload the file when it changed
+-- TODO:
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
 
 -- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--   callback = function()
+--     vim.highlight.on_yank()
+--   end,
+-- })
 
 -- resize splits if window got resized
-vim.api.nvim_create_autocmd({ "VimResized" }, {
+-- vim.api.nvim_create_autocmd({ "VimResized" }, {
+--   callback = function()
+--     vim.cmd("tabdo wincmd =")
+--   end,
+-- })
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = vim.api.nvim_create_augroup("highlight_yank", {}),
+  desc = "Hightlight selection on yank",
+  pattern = "*",
   callback = function()
-    vim.cmd("tabdo wincmd =")
+    vim.highlight.on_yank({ higroup = "ScrollbarHintHandle", timeout = 500 })
   end,
 })
 
@@ -38,9 +48,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "notify",
     "lspinfo",
     "spectre_panel",
-    "startuptime",
     "tsplayground",
-    "PlenaryTestPopup",
     "checkhealth",
   },
   callback = function(event)

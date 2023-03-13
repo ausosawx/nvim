@@ -24,7 +24,7 @@ local defaults = {
       removed = " ",
     },
     kinds = {
-      Suggestion = "", -- " "  " " " "
+      Codeium = "", -- " "  " " " "
       Array = " ",
       Boolean = " ",
       Class = " ",

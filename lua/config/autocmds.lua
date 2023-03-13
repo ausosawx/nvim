@@ -5,26 +5,10 @@
 -- TODO:
 vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, { command = "checktime" })
 
--- Highlight on yank
--- vim.api.nvim_create_autocmd("TextYankPost", {
---   callback = function()
---     vim.highlight.on_yank()
---   end,
--- })
-
 -- resize splits if window got resized
--- vim.api.nvim_create_autocmd({ "VimResized" }, {
---   callback = function()
---     vim.cmd("tabdo wincmd =")
---   end,
--- })
-
-vim.api.nvim_create_autocmd("TextYankPost", {
-  group = vim.api.nvim_create_augroup("highlight_yank", {}),
-  desc = "Hightlight selection on yank",
-  pattern = "*",
+vim.api.nvim_create_autocmd({ "WinResized" }, {
   callback = function()
-    vim.highlight.on_yank({ higroup = "ScrollbarHintHandle", timeout = 500 })
+    vim.cmd("tabdo wincmd =")
   end,
 })
 
@@ -66,6 +50,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- show cursor line only in active window
+-- TODO:
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
   callback = function()
     local ok, cl = pcall(vim.api.nvim_win_get_var, 0, "auto-cursorline")
